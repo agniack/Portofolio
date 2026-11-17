@@ -1,10 +1,13 @@
-
+/* =========================================================
+   DASAR
+   ========================================================= */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
+/* Latar di luar halaman (saat scroll/ditarik melewati ujung) */
 html {
     min-height: 100%;
     background-color: #fbc2f5;
@@ -28,9 +31,7 @@ body {
         #8fd3f4
     );
 }
-body {
-    min-height: 100vh;
-}
+
 img,
 video {
     display: block;
@@ -48,6 +49,7 @@ video {
 
 /* Semua section = kartu membulat */
 section {
+    min-width: 0;
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(8px);
     border-radius: 24px;
@@ -169,7 +171,7 @@ section {
 .experience-item {
     position: relative;
     display: grid;
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 110px 1fr;
     gap: 20px;
     align-items: baseline;
 }
@@ -190,6 +192,7 @@ section {
 .year {
     font-weight: 700;
     color: #5b3fc4;
+    white-space: nowrap;
 }
 
 .experience-item h3 {
@@ -203,11 +206,9 @@ section {
     max-width: 70ch;
 }
 
-
 /* =========================================================
    PROJECTS - GALERI
    ========================================================= */
-
 .media-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1.5fr;
@@ -215,65 +216,38 @@ section {
     align-items: start;
 }
 
-/* Kotak media */
 .media {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border: none;
     border-radius: 16px;
     background: transparent;
 }
 
-/* POSTER INSTAGRAM 4:5 */
+/* Poster Instagram 4:5, tidak dipotong */
 .media--poster {
     aspect-ratio: 4 / 5;
-    background: transparent;
 }
 
 .media--poster img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: transparent;
 }
 
-/* VIDEO */
+/* Video */
 .media--video {
-    aspect-ratio: 4/ 3;
-    background: transparent;
+    aspect-ratio: 4 / 3;
 }
 
 .media--video video {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: transparent;
 }
-
-/* Hilangkan tulisan placeholder */
-.media::before {
-    display: none;
-}
-
-/* RESPONSIF HP */
-@media (max-width: 640px) {
-    .media-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
-    .media--video {
-        grid-column: 1 / -1;
-        width: 100%;
-    }
-}
-
 
 /* =========================================================
-   PROJECTS: deskripsi
+   PROJECTS - DESKRIPSI
    ========================================================= */
 .project-item {
     margin-top: 32px;
@@ -294,12 +268,8 @@ section {
     color: #5b3fc4;
 }
 
-.project-meta span:first-child {
-    font-weight: 600;
-}
-
-.project-body h3 {
-    margin: 0 0 8px;
+.project-meta h2 {
+    margin: 0;
     font-size: 22px;
     line-height: 1.3;
 }
@@ -307,6 +277,11 @@ section {
 .project-body p {
     margin: 0 0 16px;
     max-width: 70ch;
+}
+
+/* Elemen kosong tidak memakan ruang */
+.project-body p:empty {
+    display: none;
 }
 
 .tags {
@@ -338,25 +313,21 @@ section {
     background: #4a31a8;
 }
 
-
-
-
 /* =========================================================
    CONTACTS
    ========================================================= */
-
 .contacts {
     width: 100%;
     max-width: none;
     margin: 40px 0;
     padding: 25px;
-    box-sizing: border-box;
     background: transparent;
     border-radius: 18px;
 }
+
 .contacts .section-title {
-    font-size: 24px;
     margin-bottom: 22px;
+    font-size: 24px;
     text-align: left;
 }
 
@@ -372,18 +343,185 @@ section {
     min-height: 70px;
     margin: 0;
     padding: 18px;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 12px;
     background: #fff;
     border-radius: 14px;
     font-weight: 500;
+    overflow-wrap: anywhere;
 }
 
-/* RESPONSIF HP */
+.contact-icon {
+    flex: none;
+    width: 28px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* =========================================================
+   RESPONSIF (semua aturan layar kecil ada di sini)
+   ========================================================= */
+
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+    .portfolio {
+        padding: 32px 24px 56px;
+    }
+
+    section {
+        padding: 32px;
+    }
+
+    .header {
+        gap: 36px;
+    }
+
+    /* 2 poster berdampingan, video penuh di bawahnya */
+    .media-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .media--video {
+        grid-column: 1 / -1;
+    }
+
+    /* Deskripsi proyek: kategori di atas, isi di bawah */
+    .project-item {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 2px 14px;
+    }
+}
+
+/* ---------- HP ---------- */
 @media (max-width: 640px) {
+    .portfolio {
+        padding: 20px 16px 40px;
+        gap: 20px;
+    }
+
+    section {
+        padding: 24px 20px;
+        border-radius: 20px;
+    }
+
+    .section-title {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    /* Profile: foto di atas, teks di bawah, rata tengah */
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+
+    .profile {
+        flex: none;
+        width: 200px;
+        height: 250px;
+    }
+
+    .intro h1 {
+        margin-bottom: 14px;
+        font-size: 28px;
+    }
+
+    .intro p {
+        margin: 0 auto;
+        font-size: 16px;
+        line-height: 1.75;
+    }
+
+    /* Skills: 4 ikon sejajar dalam satu baris */
+    .skill-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px 8px;
+    }
+
+    .skill {
+        width: auto;
+    }
+
+    .skill-icon {
+        width: 100%;
+        max-width: 64px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        font-size: 20px;
+    }
+
+    .skill p {
+        font-size: 12px;
+    }
+
+    /* Experience: tahun di atas judul */
+    .experience-list {
+        gap: 24px;
+        padding-left: 22px;
+    }
+
+    .experience-item {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .experience-item::before {
+        left: -30px;
+        top: 7px;
+    }
+
+    .year {
+        font-size: 15px;
+    }
+
+    .experience-item h3 {
+        font-size: 18px;
+    }
+
+    /* Galeri */
+    .media-grid {
+        gap: 10px;
+    }
+
+    /* Deskripsi proyek */
+    .project-item {
+        margin-top: 24px;
+        padding: 20px;
+    }
+
+    .project-meta h2 {
+        font-size: 20px;
+    }
+
+    .project-link {
+        display: block;
+        text-align: center;
+    }
+
+    /* Contacts */
+    .contacts {
+        margin: 0;
+        padding: 8px 4px;
+    }
+
     .contact-list {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .contact-list p {
+        min-height: 60px;
+        padding: 14px 16px;
     }
 }
