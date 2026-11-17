@@ -1,4 +1,17 @@
 /* =========================================================
+   TYPOGRAPHY: ukuran font fluid (HP → desktop) dengan clamp()
+   clamp(terkecil di HP, mengikuti lebar layar, terbesar di desktop)
+   ========================================================= */
+:root {
+    --fs-h1:    clamp(1.25rem, 0.5rem + 3.6vw, 2.875rem);       /* 20 – 46px */
+    --fs-h2:    clamp(1.375rem, 1.15rem + 1vw, 1.75rem);        /* 22 – 28px */
+    --fs-h3:    clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);       /* 17 – 20px */
+    --fs-body:  clamp(0.9375rem, 0.88rem + 0.25vw, 1.0625rem);  /* 15 – 17px */
+    --fs-small: clamp(0.8125rem, 0.78rem + 0.15vw, 0.9375rem);  /* 13 – 15px */
+    --fs-label: clamp(0.75rem, 0.69rem + 0.25vw, 0.875rem);     /* 12 – 14px */
+}
+
+/* =========================================================
    DASAR
    ========================================================= */
 *,
@@ -14,6 +27,8 @@ html {
     background-image: linear-gradient(to bottom, #fbc2f5 50%, #8fd3f4 50%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -21,8 +36,10 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: "Poppins", "Segoe UI", system-ui, sans-serif;
-    color: #2b2350;
+    font-size: var(--fs-body);
     line-height: 1.7;
+    letter-spacing: 0;
+    color: #2b2350;
     background: linear-gradient(
         to bottom,
         #fbc2f5,
@@ -30,6 +47,24 @@ body {
         #84a7fa,
         #8fd3f4
     );
+}
+
+/* Teks tidak boleh keluar dari container */
+h1,
+h2,
+h3,
+p {
+    overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
 }
 
 img,
@@ -57,9 +92,10 @@ section {
 }
 
 .section-title {
-    margin: 0 0 28px;
-    font-size: 28px;
+    margin: 0 0 clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    font-size: var(--fs-h2);
     line-height: 1.2;
+    letter-spacing: -0.01em;
     color: #3a2a7a;
 }
 
@@ -89,22 +125,23 @@ section {
 
 .intro h1 {
     margin: 0 0 20px;
-    font-size: clamp(30px, 4.2vw, 46px);
+    font-size: var(--fs-h1);
     line-height: 1.15;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
 }
 
 .intro h3 {
     margin: 0 0 8px;
-    font-size: 20px;
+    font-size: var(--fs-h3);
+    line-height: 1.3;
     color: #5b3fc4;
 }
 
 .intro p {
     margin: 0;
     max-width: 60ch;
-    font-size: 17px;
-    line-height: 1.8;
+    font-size: var(--fs-body);
+    line-height: 1.75;
 }
 
 /* =========================================================
@@ -124,7 +161,7 @@ section {
 
 .skill p {
     margin: 10px 0 0;
-    font-size: 14px;
+    font-size: var(--fs-label);
     font-weight: 500;
     line-height: 1.3;
 }
@@ -138,7 +175,7 @@ section {
     overflow: hidden;
     display: grid;
     place-items: center;
-    font-size: 24px;
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
     font-weight: 700;
     color: #fff;
 }
@@ -190,6 +227,7 @@ section {
 }
 
 .year {
+    font-size: var(--fs-body);
     font-weight: 700;
     color: #5b3fc4;
     white-space: nowrap;
@@ -197,7 +235,7 @@ section {
 
 .experience-item h3 {
     margin: 0;
-    font-size: 19px;
+    font-size: var(--fs-h3);
     line-height: 1.3;
 }
 
@@ -263,14 +301,14 @@ section {
 .project-meta {
     display: grid;
     gap: 2px;
-    font-size: 15px;
+    font-size: var(--fs-small);
     line-height: 1.5;
     color: #5b3fc4;
 }
 
 .project-meta h2 {
     margin: 0;
-    font-size: 22px;
+    font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.375rem);
     line-height: 1.3;
 }
 
@@ -294,8 +332,9 @@ section {
     padding: 3px 12px;
     border-radius: 999px;
     background: #efeaff;
-    font-size: 13px;
+    font-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
     font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .project-link {
@@ -305,7 +344,9 @@ section {
     border-radius: 10px;
     background: #5b3fc4;
     color: #fff;
+    font-size: var(--fs-body);
     font-weight: 500;
+    line-height: 1.4;
     text-decoration: none;
 }
 
@@ -327,7 +368,7 @@ section {
 
 .contacts .section-title {
     margin-bottom: 22px;
-    font-size: 24px;
+    font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
     text-align: left;
 }
 
@@ -348,7 +389,9 @@ section {
     gap: 12px;
     background: #fff;
     border-radius: 14px;
+    font-size: var(--fs-body);
     font-weight: 500;
+    line-height: 1.45;
     overflow-wrap: anywhere;
 }
 
@@ -356,12 +399,13 @@ section {
     flex: none;
     width: 28px;
     text-align: center;
-    font-size: 20px;
+    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
     line-height: 1;
 }
 
 /* =========================================================
-   RESPONSIF (semua aturan layar kecil ada di sini)
+   RESPONSIF - hanya tata letak.
+   Ukuran font sudah fluid lewat clamp() di atas.
    ========================================================= */
 
 /* ---------- Tablet ---------- */
@@ -413,17 +457,12 @@ section {
         border-radius: 20px;
     }
 
-    .section-title {
-        margin-bottom: 20px;
-        font-size: 24px;
-    }
-
-    /* Profile: foto di kiri (seperti desktop), nama di kanannya,
-       paragraf About Me di bawah selebar kartu */
+    /* Profile: foto kiri, nama kanan; About Me + paragraf di bawahnya.
+       gap: 0 16px = jarak antar baris 0, jarak antar kolom 16px */
     .header {
         display: grid;
         grid-template-columns: clamp(100px, 30vw, 160px) minmax(0, 1fr);
-        column-gap: 16px;
+        gap: 0 16px;
         align-items: stretch;
         text-align: left;
     }
@@ -437,7 +476,7 @@ section {
         aspect-ratio: 4 / 5;
     }
 
-    /* .intro "dilebur" supaya h1, h3, dan p bisa ditata langsung oleh grid .header */
+    /* .intro "dilebur" supaya h1, h3, dan p ditata langsung oleh grid .header */
     .intro {
         display: contents;
     }
@@ -447,14 +486,12 @@ section {
         grid-row: 1;
         align-self: center;
         margin: 0;
-        font-size: clamp(18px, 5.5vw, 24px);
     }
 
     .intro h3 {
         grid-column: 1 / -1;
         grid-row: 2;
         margin: 20px 0 4px;
-        font-size: 17px;
     }
 
     .intro p {
@@ -462,8 +499,6 @@ section {
         grid-row: 3;
         max-width: none;
         margin: 0;
-        font-size: 15px;
-        line-height: 1.75;
     }
 
     /* Skills: 4 ikon sejajar dalam satu baris */
@@ -482,11 +517,6 @@ section {
         max-width: 64px;
         height: auto;
         aspect-ratio: 1 / 1;
-        font-size: 20px;
-    }
-
-    .skill p {
-        font-size: 12px;
     }
 
     /* Experience: tahun di atas judul */
@@ -505,14 +535,6 @@ section {
         top: 7px;
     }
 
-    .year {
-        font-size: 15px;
-    }
-
-    .experience-item h3 {
-        font-size: 18px;
-    }
-
     /* Galeri */
     .media-grid {
         gap: 10px;
@@ -522,10 +544,6 @@ section {
     .project-item {
         margin-top: 24px;
         padding: 20px;
-    }
-
-    .project-meta h2 {
-        font-size: 20px;
     }
 
     .project-link {
