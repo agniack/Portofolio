@@ -418,27 +418,52 @@ section {
         font-size: 24px;
     }
 
-    /* Profile: foto di atas, teks di bawah, rata tengah */
+    /* Profile: foto di kiri (seperti desktop), nama di kanannya,
+       paragraf About Me di bawah selebar kartu */
     .header {
-        flex-direction: column;
-        text-align: center;
-        gap: 24px;
+        display: grid;
+        grid-template-columns: clamp(100px, 30vw, 160px) minmax(0, 1fr);
+        column-gap: 16px;
+        align-items: stretch;
+        text-align: left;
     }
 
     .profile {
+        grid-column: 1;
+        grid-row: 1 / span 2;
         flex: none;
-        width: 200px;
-        height: 250px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 5;
+    }
+
+    /* .intro "dilebur" supaya h1, h3, dan p bisa ditata langsung oleh grid .header */
+    .intro {
+        display: contents;
     }
 
     .intro h1 {
-        margin-bottom: 14px;
-        font-size: 28px;
+        grid-column: 2;
+        grid-row: 1;
+        align-self: end;
+        margin: 0 0 4px;
+        font-size: clamp(18px, 5.5vw, 24px);
+    }
+
+    .intro h3 {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+        margin: 0;
+        font-size: 17px;
     }
 
     .intro p {
-        margin: 0 auto;
-        font-size: 16px;
+        grid-column: 1 / -1;
+        grid-row: 3;
+        max-width: none;
+        margin: 16px 0 0;
+        font-size: 15px;
         line-height: 1.75;
     }
 
